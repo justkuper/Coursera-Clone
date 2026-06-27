@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.production
+amplify/.config/local-*
+amplify/#current-cloud-backend
+amplify/logs
+amplify/mock-data
+amplify/backend/amplify-meta.json
+amplify/backend/.temp
+.amplifyrc
+.DS_Store
+*.log
+.npm
