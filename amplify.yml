@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install --cache .npm --prefer-offline
+        - npm install
         # Backend pipeline-deploy intentionally disabled until Amplify Gen 2
         # backend is provisioned via: npx ampx sandbox
         # Uncomment below once backend is initialized:
@@ -18,7 +18,5 @@ frontend:
     baseDirectory: dist
     files:
       - '**/*'
-  cache:
-    paths:
-      - .npm/**/*
-      - node_modules/**/*
+  # No node_modules cache — platform-specific native binaries (rollup, parcel)
+  # must be compiled fresh on Linux; caching macOS builds causes failures.
