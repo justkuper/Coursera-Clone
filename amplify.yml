@@ -1,15 +1,15 @@
 version: 1
-backend:
-  phases:
-    build:
-      commands:
-        - npm ci --cache .npm --prefer-offline
-        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     preBuild:
       commands:
         - npm ci --cache .npm --prefer-offline
+        # Deploy Amplify Gen 2 backend (runs automatically when repo is connected
+        # in Amplify Console and AWS_APP_ID / AWS_BRANCH env vars are set)
+        - |
+          if [ -n "$AWS_APP_ID" ] && [ -n "$AWS_BRANCH" ]; then
+            npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
+          fi
     build:
       commands:
         - npm run build
