@@ -4,12 +4,13 @@ frontend:
     preBuild:
       commands:
         - npm install --cache .npm --prefer-offline
-        # Deploy Amplify Gen 2 backend (runs automatically when repo is connected
-        # in Amplify Console and AWS_APP_ID / AWS_BRANCH env vars are set)
-        - |
-          if [ -n "$AWS_APP_ID" ] && [ -n "$AWS_BRANCH" ]; then
-            npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
-          fi
+        # Backend pipeline-deploy intentionally disabled until Amplify Gen 2
+        # backend is provisioned via: npx ampx sandbox
+        # Uncomment below once backend is initialized:
+        # - |
+        #   if [ -n "$AWS_APP_ID" ] && [ -n "$AWS_BRANCH" ]; then
+        #     npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
+        #   fi
     build:
       commands:
         - npm run build
